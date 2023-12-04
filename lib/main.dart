@@ -27,15 +27,14 @@ class TimelineScreen extends StatelessWidget {
         title: Text('Flutter Timeline'),
       ),
       body: Center(
-        child: Container(
-          padding: EdgeInsets.symmetric(vertical: 20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buildTimelineItem("content1", "date1"),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                buildTimelineItem("content1", "date1"),
+              ],
+            ),
           ),
-        ),
       ),
     );
   }
@@ -100,18 +99,100 @@ class TimelineScreen extends StatelessWidget {
             color: Colors.purple,
             thickness: 6,
           ),
-          afterLineStyle: const LineStyle(
-            color: Colors.purple,
-            thickness: 6,
-          ),
           indicatorStyle: const IndicatorStyle(
             width: 20,
             color: Colors.amber,
           ),
+          endChild: Row(
+            children: [
+              Text("  data  "),
+              Container(
+                padding: EdgeInsets.all(16),
+                constraints: const BoxConstraints(
+                  minHeight: 80,
+                ),
+                color: Colors.lightGreenAccent,
+                child:Column(
+                  children: [
+                    Text("BAŞLIK"),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          child: Image.network("https://picsum.photos/536/354",fit: BoxFit.fill,),
+                          height: 200,
+                          width: 200,
+                        ),
+                        SizedBox(width: 20,),
+                        Container(
+                          child: Image.network("https://picsum.photos/536/354",fit: BoxFit.fill,),
+                          height: 200,
+                          width: 200,
+                        ),
+                      ],
+                    ) // İlk tarih burada
+                    // İlk içerik burada
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
         TimelineTile(
           alignment: TimelineAlign.center,
-          isLast: true,
+          indicatorStyle: const IndicatorStyle(
+            width: 20,
+            color: Colors.amber,
+          ),
+          beforeLineStyle: const LineStyle(
+            color: Colors.purple,
+            thickness: 6,
+          ),
+          startChild: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                padding: EdgeInsets.all(16),
+                constraints: BoxConstraints(
+                  minHeight: 120,
+                ),
+                color: Colors.amberAccent,
+                child: Column(
+                  children: [
+                    Text("BAŞLIK"),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          child: Image.network("https://picsum.photos/536/354",fit: BoxFit.fill,),
+                          height: 200,
+                          width: 200,
+                        ),
+                        SizedBox(width: 20,),
+                        Container(
+                          child: Image.network("https://picsum.photos/536/354",fit: BoxFit.fill,),
+                          height: 200,
+                          width: 200,
+                        ),
+                      ],
+                    ) // İlk tarih burada
+                    // İlk içerik burada
+                  ],
+                ),
+              ),
+              Text("  tarih "),
+            ],
+          ),
+        ),
+        TimelineTile(
+          alignment: TimelineAlign.center,
           beforeLineStyle: const LineStyle(
             color: Colors.purple,
             thickness: 6,
@@ -158,6 +239,58 @@ class TimelineScreen extends StatelessWidget {
             ],
           ),
         ),
+        TimelineTile(
+          alignment: TimelineAlign.center,
+          isLast: true,
+          indicatorStyle: const IndicatorStyle(
+            width: 20,
+            color: Colors.amber,
+          ),
+          beforeLineStyle: const LineStyle(
+            color: Colors.purple,
+            thickness: 6,
+          ),
+          startChild: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                padding: EdgeInsets.all(16),
+                constraints: BoxConstraints(
+                  minHeight: 120,
+                ),
+                color: Colors.amberAccent,
+                child: Column(
+                  children: [
+                    Text("BAŞLIK"),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          child: Image.network("https://picsum.photos/536/354",fit: BoxFit.fill,),
+                          height: 200,
+                          width: 200,
+                        ),
+                        SizedBox(width: 20,),
+                        Container(
+                          child: Image.network("https://picsum.photos/536/354",fit: BoxFit.fill,),
+                          height: 200,
+                          width: 200,
+                        ),
+                      ],
+                    ) // İlk tarih burada
+                    // İlk içerik burada
+                  ],
+                ),
+              ),
+              Text("  tarih "),
+            ],
+          ),
+        ),
+
       ],
     );
   }
