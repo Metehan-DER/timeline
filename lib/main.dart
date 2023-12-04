@@ -20,278 +20,114 @@ class MyApp extends StatelessWidget {
 }
 
 class TimelineScreen extends StatelessWidget {
+  final List<Map<String, String>> timelineData = [
+    {
+      'title': 'Başlık 1',
+      'date': 'Tarih 1',
+      'image1': 'https://picsum.photos/536/354',
+      'image2': 'https://picsum.photos/536/354',
+      'isRightAligned': 'true', // İlk öğe sağda
+    },
+    {
+      'title': 'Başlık 2',
+      'date': 'Tarih 2',
+      'image1': 'https://picsum.photos/536/354',
+      'image2': 'https://picsum.photos/536/354',
+      'isRightAligned': 'false',   // ikinci solda
+    },
+    // Diğer zaman çizelgesi verileri eklemek isterseniz
+    {
+      'title': 'Başlık n',
+      'date': 'Tarih n',
+      'image1': 'https://picsum.photos/536/354',
+      'image2': 'https://picsum.photos/536/354',
+      'isRightAligned': 'true', // Son öğe solda
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Flutter Timeline'),
       ),
-      body: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                buildTimelineItem("content1", "date1"),
-              ],
-            ),
-          ),
+      body: ListView.builder(
+        itemCount: timelineData.length,
+        itemBuilder: (context, index) {
+          final isRightAligned =
+              timelineData[index]['isRightAligned'] == 'true';
+
+          return buildTimelineItem(
+            timelineData[index]['title']!,
+            timelineData[index]['date']!,
+            timelineData[index]['image1']!,
+            timelineData[index]['image2']!,
+            isRightAligned,
+            isFirst: index == 0,
+            isLast: index == timelineData.length - 1,
+          );
+        },
       ),
     );
   }
 
-  Widget buildTimelineItem(String content1, String date1) {
-    return Column(
-      children: [
-        TimelineTile(
-          alignment: TimelineAlign.center,
-          isFirst: true,
-          indicatorStyle: const IndicatorStyle(
-            width: 20,
-            color: Colors.amber,
-          ),
-          beforeLineStyle: const LineStyle(
-            color: Colors.purple,
-            thickness: 6,
-          ),
-          startChild: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                padding: EdgeInsets.all(16),
-                constraints: BoxConstraints(
-                  minHeight: 120,
-                ),
-                color: Colors.amberAccent,
-                child: Column(
-                  children: [
-                    Text("BAŞLIK"),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          child: Image.network("https://picsum.photos/536/354",fit: BoxFit.fill,),
-                          height: 200,
-                          width: 200,
-                        ),
-                        SizedBox(width: 20,),
-                        Container(
-                          child: Image.network("https://picsum.photos/536/354",fit: BoxFit.fill,),
-                          height: 200,
-                          width: 200,
-                        ),
-                      ],
-                    ) // İlk tarih burada
-                    // İlk içerik burada
-                  ],
-                ),
-              ),
-              Text("  tarih "),
-            ],
-          ),
-        ),
-        TimelineTile(
-          alignment: TimelineAlign.center,
-          beforeLineStyle: const LineStyle(
-            color: Colors.purple,
-            thickness: 6,
-          ),
-          indicatorStyle: const IndicatorStyle(
-            width: 20,
-            color: Colors.amber,
-          ),
-          endChild: Row(
-            children: [
-              Text("  data  "),
-              Container(
-                padding: EdgeInsets.all(16),
-                constraints: const BoxConstraints(
-                  minHeight: 80,
-                ),
-                color: Colors.lightGreenAccent,
-                child:Column(
-                  children: [
-                    Text("BAŞLIK"),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          child: Image.network("https://picsum.photos/536/354",fit: BoxFit.fill,),
-                          height: 200,
-                          width: 200,
-                        ),
-                        SizedBox(width: 20,),
-                        Container(
-                          child: Image.network("https://picsum.photos/536/354",fit: BoxFit.fill,),
-                          height: 200,
-                          width: 200,
-                        ),
-                      ],
-                    ) // İlk tarih burada
-                    // İlk içerik burada
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        TimelineTile(
-          alignment: TimelineAlign.center,
-          indicatorStyle: const IndicatorStyle(
-            width: 20,
-            color: Colors.amber,
-          ),
-          beforeLineStyle: const LineStyle(
-            color: Colors.purple,
-            thickness: 6,
-          ),
-          startChild: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                padding: EdgeInsets.all(16),
-                constraints: BoxConstraints(
-                  minHeight: 120,
-                ),
-                color: Colors.amberAccent,
-                child: Column(
-                  children: [
-                    Text("BAŞLIK"),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          child: Image.network("https://picsum.photos/536/354",fit: BoxFit.fill,),
-                          height: 200,
-                          width: 200,
-                        ),
-                        SizedBox(width: 20,),
-                        Container(
-                          child: Image.network("https://picsum.photos/536/354",fit: BoxFit.fill,),
-                          height: 200,
-                          width: 200,
-                        ),
-                      ],
-                    ) // İlk tarih burada
-                    // İlk içerik burada
-                  ],
-                ),
-              ),
-              Text("  tarih "),
-            ],
-          ),
-        ),
-        TimelineTile(
-          alignment: TimelineAlign.center,
-          beforeLineStyle: const LineStyle(
-            color: Colors.purple,
-            thickness: 6,
-          ),
-          indicatorStyle: const IndicatorStyle(
-            width: 20,
-            color: Colors.amber,
-          ),
-          endChild: Row(
-            children: [
-              Text("  data  "),
-              Container(
-                padding: EdgeInsets.all(16),
-                constraints: const BoxConstraints(
-                  minHeight: 80,
-                ),
-                color: Colors.lightGreenAccent,
-                child:Column(
-                  children: [
-                    Text("BAŞLIK"),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          child: Image.network("https://picsum.photos/536/354",fit: BoxFit.fill,),
-                          height: 200,
-                          width: 200,
-                        ),
-                        SizedBox(width: 20,),
-                        Container(
-                          child: Image.network("https://picsum.photos/536/354",fit: BoxFit.fill,),
-                          height: 200,
-                          width: 200,
-                        ),
-                      ],
-                    ) // İlk tarih burada
-                    // İlk içerik burada
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-        TimelineTile(
-          alignment: TimelineAlign.center,
-          isLast: true,
-          indicatorStyle: const IndicatorStyle(
-            width: 20,
-            color: Colors.amber,
-          ),
-          beforeLineStyle: const LineStyle(
-            color: Colors.purple,
-            thickness: 6,
-          ),
-          startChild: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                padding: EdgeInsets.all(16),
-                constraints: BoxConstraints(
-                  minHeight: 120,
-                ),
-                color: Colors.amberAccent,
-                child: Column(
-                  children: [
-                    Text("BAŞLIK"),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          child: Image.network("https://picsum.photos/536/354",fit: BoxFit.fill,),
-                          height: 200,
-                          width: 200,
-                        ),
-                        SizedBox(width: 20,),
-                        Container(
-                          child: Image.network("https://picsum.photos/536/354",fit: BoxFit.fill,),
-                          height: 200,
-                          width: 200,
-                        ),
-                      ],
-                    ) // İlk tarih burada
-                    // İlk içerik burada
-                  ],
-                ),
-              ),
-              Text("  tarih "),
-            ],
-          ),
-        ),
+  Widget buildTimelineItem(
+      String title,
+      String date,
+      String image1,
+      String image2,
+      bool isRightAligned,
+      {bool isFirst = false, bool isLast = false}
+      ) {
+    return TimelineTile(
+      alignment: TimelineAlign.center,
+      lineXY: isRightAligned ? 0.1 : 0.9,
+      indicatorStyle: const IndicatorStyle(
+        width: 20,
+        color: Colors.amber,
+      ),
+      beforeLineStyle: const LineStyle(
+        color: Colors.purple,
+        thickness: 6,
+      ),
+      startChild: isRightAligned ? null : buildContent(title, image1, image2),
+      endChild: isRightAligned ? buildContent(title, image1, image2) : null,
+      isFirst: isFirst,
+      isLast: isLast,
+    );
+  }
 
-      ],
+  Widget buildContent(String title, String image1, String image2) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      constraints: BoxConstraints(
+        minHeight: 120,
+      ),
+      color: Colors.amberAccent,
+      child: Column(
+        children: [
+          Text(title),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                child: Image.network(image1, fit: BoxFit.fill),
+                height: 200,
+                width: 200,
+              ),
+              SizedBox(width: 20),
+              Container(
+                child: Image.network(image2, fit: BoxFit.fill),
+                height: 200,
+                width: 200,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
